@@ -7,8 +7,7 @@
 const { createCoreController } = require('@strapi/strapi').factories;
 
 module.exports = createCoreController('api::payment-callback.payment-callback', ({strapi}) => ({
-    async create(ctx){
-
+    async create(ctx) {
         let requestData = ctx.request.body;
 
         console.log('request xendit ', requestData);
@@ -19,14 +18,14 @@ module.exports = createCoreController('api::payment-callback.payment-callback', 
 
         let params = {}
 
-        if (requestData.status == 'PAID'){
+        if(requestData.status == 'PAID'){
             params = {'data' : {'status': 'packaging'}}
-        } else {
-            params = {'data' : {'status': 'cancel'}
+
+        }else {
+            params = {'data' : {'status': 'cancel'}}
         }
 
         let updateOrder = await strapi.service('api::order.order').update(parseInt(requestData.external_id), params);
         return {'data': updateOrder}
-    }
     }
 }));

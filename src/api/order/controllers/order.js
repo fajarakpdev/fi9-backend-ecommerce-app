@@ -25,7 +25,7 @@ module.exports = createCoreController('api::order.order', ({strapi}) => ({
         }
 
         console.log(payload);
-        const response = await axios ({
+        const response = await axios({
             method: 'POST',
             url: 'https://api.xendit.co/v2/invoices',
             headers: xenditHeaders,
